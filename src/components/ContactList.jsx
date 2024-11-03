@@ -1,7 +1,8 @@
-import react, { Component } from "react";
+
 import { useState } from 'react'
 import ContactRow from './ContactRow.jsx'
 import {useEffect} from 'react'
+// import axios from 'axios'
 
 const dummyContacts = [
     { id: 1, name: "R2-D2", phone: "222-222-2222", email: "r2d2@droids.com" },
@@ -9,14 +10,14 @@ const dummyContacts = [
     { id: 3, name: "BB-8", phone: "888-888-8888", email: "bb8@droids.com" },
   ];
  
- function ContactList({setSelectedContactId}){
+ function ContactList ({setSelectedContactId}) {
     const [contacts, setContacts] = useState(dummyContacts)
     
     useEffect (()=>{
         async function fetchContacts(){
     try{
         // your fetch logic will go here
-        const response= await fetch ("https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users"
+        const response= await fetch("https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users"
         );
         const result = await response.json();
         setContacts(result);
@@ -51,5 +52,5 @@ fetchContacts();
         </table>
         
     );
-    export default ContactList
 }
+export default ContactList
