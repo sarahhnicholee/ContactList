@@ -1,15 +1,16 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import ContactRow from './ContactRow';
 
 
-const SelectedContact = () => {
+const SelectedContact = ({selectedContactId, setSelectedContactId}) => {
     const [contact, setContact]= useState(null)
 
     useEffect (()=>{
         async function fetchContact(){
     try{
+        console.log(selectedContactId)
         // your fetch logic will go here
-        const response= await fetch("https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users"
+        const response= await fetch(`https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users/${selectedContactId}`
         );
         const result = await response.json();
         setContact(result);
@@ -20,7 +21,7 @@ const SelectedContact = () => {
 fetchContact();
     },[]);
 
-    console.log("Contact: ", contact)
+    // console.log("Contact: ", contact)
 
     return(
         <table>
@@ -35,9 +36,8 @@ fetchContact();
                 <td>Email</td>
                 <td>Phone</td>
             </tr>
-                {/* {contacts.map((contact) => {
-                    return <ContactRow key={contact.id} contact={contact} />;
-                  })} */}
+            
+            {contact && <ContactRow contact={contact} setSelectedContactId={setSelectedContactId}/>}
         </tbody>
     </table>
     )
